@@ -32,9 +32,9 @@ export const generateMeltyAudio = async (
     }
 
     // 1. Select a random script from the chosen mood category
-    const scripts = SCRIPT_DB[moodId];
+    const scripts = SCRIPT_DB[moodId]?.[language];
     if (!scripts || scripts.length === 0) {
-      throw new Error(`No scripts found for mood: ${moodId}`);
+      throw new Error(`No scripts found for mood: ${moodId} in language: ${language}`);
     }
 
     // Secure random selection
