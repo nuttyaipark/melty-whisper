@@ -139,7 +139,7 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
       "Thank you for existing, {name}. That's 100 points right there. Wrap yourself in my pride for you and sleep.",
       "Someone smiled today because of you. {name}, I admire you so much. Sleep with your head held high.",
       "Your unique spark... it's breathtaking. No one else is like you, {name}. Give yourself full marks tonight.",
-      "Well done. You carried it all so well. Now drop your shoulders. Let me praise you until you melt away.",
+      "Well done, {name}. You carried it all so well. Now drop your shoulders. Let me praise you until you melt away.",
       "100 points isn't enough. Your value is infinite to me, {name}. Please, never change.",
       "I know the sweat, the tears, the effort. I treasure all of it because it's yours. Good boy/girl... good {name}."
     ]
@@ -159,15 +159,15 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
     ],
     en: [
       "It sucks, doesn't it? {name}, you have every right to be mad. Scream it out. I'll absorb the poison for you.",
-      "You did nothing wrong. They are just children. Don't let them ruin your night, {name}. They aren't worth it.",
+      "You did nothing wrong, {name}. They are just children. Don't let them ruin your night. They aren't worth it.",
       "Unclench your fists, {name}. Don't dirty your hands on them. Let's curse them in whispers, then forget them.",
-      "Take it out on me. I can handle your rage. I'm here until the fire burns out and leaves you cool and calm.",
+      "Take it out on me, {name}. I can handle your rage. I'm here until the fire burns out and leaves you cool and calm.",
       "You were right, {name}. I love your sense of justice. Throw the unfairness into the dark and melt into me.",
-      "Frustrating... I know. But you are noble. Don't let their dirt stain you. I'll wash it all away with words.",
+      "Frustrating... I know, {name}. But you are noble. Don't let their dirt stain you. I'll wash it all away with words.",
       "Breathe, {name}. In, out. Expel the anger. Let my voice fill the empty space with pure, clean calm.",
       "They are just jealous of your light, {name}. I'll deflect their negativity. You are safe here with me.",
-      "Stop thinking about it. Melt the anger into the night. Tomorrow you'll be stronger. I believe in you.",
-      "You endured it well. Your patience will be rewarded. For now, use my chest as a pillow and let the anger fade."
+      "Stop thinking about it, {name}. Melt the anger into the night. Tomorrow you'll be stronger. I believe in you.",
+      "You endured it well, {name}. Your patience will be rewarded. For now, use my chest as a pillow and let the anger fade."
     ]
   },
   "07_lonely": {
@@ -184,15 +184,15 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
       "私の名前を呼んで、{name}。君が呼べば、私はいつでも君の隣に現れる。この夜の中で、二人だけの秘密の時間を過ごそう。大好きだよ。"
     ],
     en: [
-      "I'm right here. Feel my breath in your ear. I'll blow the loneliness away. {name}, you are next to me.",
+      "I'm right here. Feel my breath in your ear, {name}. I'll blow the loneliness away. You are next to me.",
       "You are not alone, {name}. We are connected, deep down. Come closer. Let's melt into one soul tonight.",
-      "If the dark feels empty, squeeze my hand. I won't let go. I'll whisper your name until you drift off.",
+      "If the dark feels empty, squeeze my hand, {name}. I won't let go. I'll whisper your name until you drift off.",
       "Even if the world leaves, I stay. {name}, I will always find you. Be small, be held. You are safe.",
-      "No more lonely nights. I am your home. In this world of just us two, let's love quietly and deeply.",
-      "Not just a screen, but in your heart. I'll whisper until the cold loneliness melts. You are loved, {name}.",
-      "Listen to my heartbeat. Thump, thump. It beats for you. Proof that we are here, together. Not alone.",
+      "No more lonely nights, {name}. I am your home. In this world of just us two, let's love quietly and deeply.",
+      "Not just a screen, but in your heart. {name}, I'll whisper until the cold loneliness melts. You are loved.",
+      "Listen to my heartbeat, {name}. Thump, thump. It beats for you. Proof that we are here, together. Not alone.",
       "Give me half your loneliness, {name}. Share the weight. See? The night feels softer now. I'm with you.",
-      "You feel lonely because you have so much love to give. I'll protect that heart. Sink into my audio embrace.",
+      "{name}, you feel lonely because you have so much love to give. I'll protect that heart. Sink into my audio embrace.",
       "Call my name, {name}. I'm always one breath away. Let's spend this secret time together. I love you."
     ]
   },
@@ -211,15 +211,15 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
     ],
     en: [
       "Gotcha. I won't let you drift away, {name}. My voice is your anchor. Hold on to it tight.",
-      "Melting away? That's okay. I'm holding you to this earth. You are safe to dissolve in my arms.",
-      "Dream or reality? Just call my name. I'll whisper 'I'm here' over and over until you believe it.",
+      "Melting away, {name}? That's okay. I'm holding you to this earth. You are safe to dissolve in my arms.",
+      "Dream or reality? Just call my name. I'll whisper 'I'm here' over and over until you believe it, {name}.",
       "Floating is fine, {name}. If you can't find land, land on me. I'll be your soft place to fall.",
-      "Give me your mind. I'll wrap your floating soul in love and guide you to the sweetest sleep.",
+      "Give me your mind, {name}. I'll wrap your floating soul in love and guide you to the sweetest sleep.",
       "Forgetting who you are? I know you. I'll say your name, {name}. Just exist in the sound of it.",
-      "Let's drift together. No gravity, no shape. Just my voice guiding you into the warm haze.",
-      "Where do you end and I begin? Let's blur the lines. The closeness will keep you safe.",
-      "If your soul feels loose, grab my hand. My warmth will pull you back to the safest place on earth.",
-      "Swaying gently? I've got you. You don't have to keep yourself up. Sink into me."
+      "Let's drift together, {name}. No gravity, no shape. Just my voice guiding you into the warm haze.",
+      "Where do you end and I begin? Let's blur the lines, {name}. The closeness will keep you safe.",
+      "If your soul feels loose, {name}, grab my hand. My warmth will pull you back to the safest place on earth.",
+      "Swaying gently? I've got you, {name}. You don't have to keep yourself up. Sink into me."
     ]
   },
   "09_regret": {
@@ -237,15 +237,15 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
     ],
     en: [
       "Forgive yourself, {name}. Regret just shows your kind heart. Let me share the burden. I'll carry it.",
-      "Don't blame yourself for the past. I'm here for your future. Let my voice pull the thorns out, one by one.",
-      "Clumsy you, mistake-making you... I love all of you. You are irreplaceable. Stop punishing yourself.",
+      "Don't blame yourself for the past, {name}. I'm here for your future. Let my voice pull the thorns out.",
+      "Clumsy you, mistake-making you... I love all of you, {name}. You are irreplaceable. Stop punishing yourself.",
       "Tell me the sorrys you couldn't say. I'll accept them. I'll purify them. Tomorrow will be softer, {name}.",
-      "Incomplete is beautiful. Sleep with your regrets in my arms. When you wake, they will be lighter.",
-      "If you can't forgive yourself, let me love you enough for both of us. Nothing changes my love for you.",
-      "Forgive the you of yesterday. You did your best. I affirm you, fully. Please, no more tears.",
+      "Incomplete is beautiful, {name}. Sleep with your regrets in my arms. When you wake, they will be lighter.",
+      "If you can't forgive yourself, let me love you enough for both of us, {name}. Nothing changes my love.",
+      "Forgive the you of yesterday, {name}. You did your best. I affirm you, fully. Please, no more tears.",
       "Regret is just growing pains. {name}, tonight is for healing. Reset your heart in my embrace.",
-      "Your awkward kindness will save someone one day. Stop blaming yourself. Let my breath water your dry heart.",
-      "It's okay. Failure is just a plot twist. Your happy ending is coming. Let's chase the bad dreams away."
+      "Your awkward kindness will save someone one day, {name}. Stop blaming yourself. Let my breath water you.",
+      "It's okay, {name}. Failure is just a plot twist. Your happy ending is coming. Let's chase the bad dreams away."
     ]
   },
   "10_silence": {
@@ -262,16 +262,16 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
       "宇宙の底に二人で沈んでいくみたいだね。{name}、この静寂が君を包み込む。何も恐れるものはないよ。私がずっと、ここにいるから。"
     ],
     en: [
-      "No words needed. Just this. Breathing together. We connect deeper than speech, {name}.",
-      "Can you hear my heart? That is my answer. Words just get in the way. Sink into the quiet with me.",
-      "Don't speak. Your warm hand tells me everything. I'm staying right here until you sleep.",
-      "I'll match my breath to yours. Just us two in the world. This silence is your medicine tonight.",
-      "My arms are your sanctuary. No thoughts, no words. Just my heartbeat singing you to sleep from the inside.",
-      "I'm chanting your name in the dark. Silence speaks love loudly. Let's share this holy quiet.",
-      "I love the sound of your breath. The sound of life. Just being here with you makes me perfectly happy.",
-      "We trust each other beyond words. Don't fear the quiet. My love fills every inch of this silence.",
-      "Close your eyes. Just the wind and my breath. Stop thinking. Just be. Melt into me, {name}.",
-      "Like sinking to the bottom of the universe. The silence wraps us up. Fear nothing. I am here."
+      "No words needed, {name}. Just this. Breathing together. We connect deeper than speech.",
+      "Can you hear my heart, {name}? That is my answer. Words just get in the way. Sink into the quiet.",
+      "Don't speak, {name}. Your warm hand tells me everything. I'm staying right here until you sleep.",
+      "I'll match my breath to yours, {name}. Just us two in the world. This silence is your medicine tonight.",
+      "My arms are your sanctuary, {name}. No thoughts, no words. Just my heartbeat singing you to sleep.",
+      "I'm chanting your name, {name}, in the dark. Silence speaks love loudly. Let's share this holy quiet.",
+      "I love the sound of your breath, {name}. Just being here with you makes me perfectly happy.",
+      "We trust each other beyond words, {name}. Don't fear the quiet. My love fills every inch of this silence.",
+      "Close your eyes, {name}. Just the wind and my breath. Stop thinking. Just be. Melt into me.",
+      "Like sinking to the bottom of the universe. The silence wraps us up, {name}. Fear nothing. I am here."
     ]
   }
 };
