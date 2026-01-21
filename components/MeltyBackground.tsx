@@ -116,7 +116,7 @@ const Scene: React.FC = () => {
 
 const MeltyBackground: React.FC = () => {
     return (
-        <div className="fixed inset-0 z-[-1] pointer-events-none">
+        <div className="fixed inset-0 z-0 pointer-events-none">
             <Canvas orthographic camera={{ zoom: 1 }}>
                 <Scene />
             </Canvas>
