@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame, extend, ReactThreeFiber } from '@react-three/fiber';
+import { Canvas, useFrame, extend } from '@react-three/fiber';
 import { ShaderMaterial, Vector2, Color } from 'three';
 import * as THREE from 'three';
 
@@ -89,11 +89,9 @@ class MeltyMaterial extends ShaderMaterial {
 extend({ MeltyMaterial });
 
 // Type definition for JSX
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            meltyMaterial: ReactThreeFiber.Object3DNode<MeltyMaterial, typeof MeltyMaterial>;
-        }
+declare module '@react-three/fiber' {
+    interface ThreeElements {
+        meltyMaterial: any;
     }
 }
 
