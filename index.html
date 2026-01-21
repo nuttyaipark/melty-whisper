@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Melty Whisper</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0dccf2",
+              "background-light": "#f5f8f8",
+              "background-dark": "#0a0a0f",
+              "violet-deep": "#1a0b2e",
+              "cyan-glow": "#0dccf2",
+              "deep-pool": "#081315",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "Noto Sans JP", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "1rem",
+              "lg": "2rem",
+              "xl": "3rem",
+              "full": "9999px"
+            },
+            animation: {
+              'meltyFlow': 'meltyFlow 15s ease infinite',
+              'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              meltyFlow: {
+                '0%': { backgroundPosition: '0% 50%' },
+                '50%': { backgroundPosition: '100% 50%' },
+                '100%': { backgroundPosition: '0% 50%' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #0a0a0f;
+        min-height: 100dvh;
+      }
+
+      /* --- Phase 1: Welcome Styles --- */
+      .drippy-text {
+        filter: url(#gooey-text);
+        text-shadow: 0 0 20px rgba(13, 204, 242, 0.5);
+      }
+      .iridescent-orb {
+        position: relative;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(13, 204, 242, 0.3) 50%, rgba(124, 58, 237, 0.3) 100%);
+        box-shadow: 
+            0 0 40px rgba(13, 204, 242, 0.4),
+            inset 0 0 20px rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .orb-glow {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        background: radial-gradient(circle, rgba(13, 204, 242, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        z-index: -1;
+      }
+
+      /* --- Phase 2: Customize Styles --- */
+      .liquid-glass {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .iridescent-border {
+        position: relative;
+      }
+      .iridescent-border::after {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(45deg, rgba(13, 204, 242, 0.4), rgba(255, 105, 180, 0.4), rgba(255, 165, 0, 0.4));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+      .bg-indigo-melty {
+        background: radial-gradient(circle at top right, #1a1b3a, #0a0b1e 60%);
+      }
+      .glow-pink { box-shadow: 0 0 40px rgba(255, 182, 193, 0.3); }
+      .glow-blue { box-shadow: 0 0 40px rgba(13, 204, 242, 0.3); }
+      .glow-orange { box-shadow: 0 0 40px rgba(255, 165, 0, 0.3); }
+
+      /* --- Phase 3: Input Styles --- */
+      .glass-edge {
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(13, 204, 242, 0.2);
+        box-shadow: 0 0 20px rgba(13, 204, 242, 0.05);
+      }
+      .liquid-glow {
+        background: radial-gradient(circle at 50% 50%, rgba(13, 204, 242, 0.15) 0%, rgba(16, 31, 34, 0) 70%);
+      }
+      .portal-glow {
+        box-shadow: 0 0 40px rgba(13, 204, 242, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2);
+      }
+      .wide-track {
+        letter-spacing: 0.25em;
+      }
+
+      /* --- Phase 4: Connect Styles --- */
+      .glow-text {
+        text-shadow: 0 0 15px rgba(13, 204, 242, 0.6);
+      }
+      .liquid-bg {
+        background: radial-gradient(circle at 50% 50%, #1a3a40 0%, #101f22 100%);
+      }
+      .pulse-layer {
+        background: radial-gradient(circle at 50% 50%, rgba(13, 204, 242, 0.08) 0%, transparent 70%);
+      }
+      .glass-panel {
+        backdrop-filter: blur(24px);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      /* --- Phase 5: Sleep Styles --- */
+      .glow-soft {
+        text-shadow: 0 0 20px rgba(13, 204, 242, 0.3);
+      }
+      
+      /* Material Symbols Font Settings */
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+      }
+      .material-symbols-outlined.fill-1 {
+        font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react": "https://esm.sh/react@^19.2.3",
+        "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+      }
+    }
+    </script>
+  </head>
+  <body class="font-display">
+    <!-- Hidden SVG Filter for Liquid Effect (used in Phase 1) -->
+    <svg style="position: absolute; width: 0; height: 0;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="gooey-text">
+          <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="4"></feGaussianBlur>
+          <feColorMatrix in="blur" mode="matrix" result="goo" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"></feColorMatrix>
+          <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+        </filter>
+      </defs>
+    </svg>
+    <div id="root" class="h-full"></div>
+  </body>
+</html>
