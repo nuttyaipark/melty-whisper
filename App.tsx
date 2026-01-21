@@ -129,7 +129,7 @@ const PARTNERS: Partner[] = [
     description: { ja: '「……別に心配してないし」', en: '"I\'m not worried, but..."' },
     color: 'from-slate-500 to-slate-700',
     promptInstruction: '',
-    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCpGMnVSLolYlVL-ac2QvpctrbzRTUvPJ5S3PQA3Wu3WfbT4XOPRAPbqJClvBc8Z4DxJiKOBOB52-GaZOw8YDDnMDMitPn1rtGZx_md9BXLlor0zExu1vthoBLpw-p50P-sfdNXbwcknPxswb3OgVDpUmBfR1HsrcEzaIVgrIFLsLyxvixh8CKr-Kv7wbSI6F4yNlmIw4GY8Zu4ikjvhNwxMlcNF31jJH4qlZ3GlaUmqceB2b0xaL8GfH4gZMV8wVN6sVad6jnPNbxt', 
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCpGMnVSLolYlVL-ac2QvpctrbzRTUvPJ5S3PQA3Wu3WfbT4XOPRAPbqJClvBc8Z4DxJiKOBOB52-GaZOw8YDDnMDMitPn1rtGZx_md9BXLlor0zExu1vthoBLpw-p50P-sfdNXbwcknPxswb3OgVDpUmBfR1HsrcEzaIVgrIFLsLyxvixh8CKr-Kv7wbSI6F4yNlmIw4GY8Zu4ikjvhNwxMlcNF31jJH4qlZ3GlaUmqceB2b0xaL8GfH4gZMV8wVN6sVad6jnPNbxt',
     glowColorClass: 'glow-blue'
   },
   {
@@ -141,7 +141,7 @@ const PARTNERS: Partner[] = [
     description: { ja: '「あなたの幸せが私のすべて」', en: '"Your happiness is my command."' },
     color: 'from-amber-600 to-yellow-700',
     promptInstruction: '',
-    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3lo-Pe_-ATnlzQtYhFG05bpO41kKtblUQ6a1CRpXZbeASXg_MYpCrVw81UsX4hDRSbI9VDxS-sF9FbdCJdxKn410lMFnRBLQP2QfOu2XfTHDN-pkVftuJ8bxi5UDNR5Ekj9n8uElrl1mJKCiHUTY4TWK8hKytpcF_mcMnfdc1GibP0InWgcXV-2JldnQffXxEGaPUOEl1yIcifjduut83FdtVzSRipVt3haxHcQV7kwAq85pMXEXKKZs0rInw4IEdJTBhXDPYFhPo', 
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3lo-Pe_-ATnlzQtYhFG05bpO41kKtblUQ6a1CRpXZbeASXg_MYpCrVw81UsX4hDRSbI9VDxS-sF9FbdCJdxKn410lMFnRBLQP2QfOu2XfTHDN-pkVftuJ8bxi5UDNR5Ekj9n8uElrl1mJKCiHUTY4TWK8hKytpcF_mcMnfdc1GibP0InWgcXV-2JldnQffXxEGaPUOEl1yIcifjduut83FdtVzSRipVt3haxHcQV7kwAq85pMXEXKKZs0rInw4IEdJTBhXDPYFhPo',
     glowColorClass: 'glow-orange'
   },
   {
@@ -186,7 +186,7 @@ const App: React.FC = () => {
   const [loadingMessage, setLoadingMessage] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
-  
+
   // UI States for interactions
   const [showNameResponse, setShowNameResponse] = useState(false);
 
@@ -199,7 +199,7 @@ const App: React.FC = () => {
   const getAudioContext = () => {
     if (!audioContextRef.current) {
       audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({
-        sampleRate: 24000 
+        sampleRate: 24000
       });
     }
     return audioContextRef.current;
@@ -214,7 +214,7 @@ const App: React.FC = () => {
   const handlePartnerSelect = (id: string) => {
     setUserState(prev => ({ ...prev, selectedPartnerId: id }));
   };
-  
+
   const handleGenderFilter = (gender: GenderType | 'All') => {
     setUserState(prev => ({ ...prev, preferredGender: gender }));
   };
@@ -235,9 +235,9 @@ const App: React.FC = () => {
     const messages = UI_TEXT[lang].connect.messages;
     setLoadingMessage(messages[0]);
     let index = 0;
-    
+
     if (loadingIntervalRef.current) clearInterval(loadingIntervalRef.current);
-    
+
     loadingIntervalRef.current = window.setInterval(() => {
       index = (index + 1) % messages.length;
       setLoadingMessage(messages[index]);
@@ -257,7 +257,7 @@ const App: React.FC = () => {
 
   const handleConnect = async () => {
     if (!userState.selectedPartnerId || !userState.selectedMoodId) return;
-    
+
     setPhase('connect');
     setIsGenerating(true);
     startLoadingMessages();
@@ -268,28 +268,28 @@ const App: React.FC = () => {
         stopLoadingMessages();
         setIsGenerating(false);
         setPhase('mood');
-        alert(lang === 'ja' 
-          ? '申し訳ありません。混み合っているか、接続に時間がかかりすぎました。もう一度お試しください。' 
+        alert(lang === 'ja'
+          ? '申し訳ありません。混み合っているか、接続に時間がかかりすぎました。もう一度お試しください。'
           : 'Connection timed out. Please try again.');
       }
     }, 45000); // 45s timeout
 
     try {
       const partner = PARTNERS.find(p => p.id === userState.selectedPartnerId)!;
-      const name = userState.name.trim() || (lang === 'ja' ? "あなた" : "You"); 
-      
+      const name = userState.name.trim() || (lang === 'ja' ? "あなた" : "You");
+
       const base64Audio = await generateMeltyAudio(name, userState.selectedMoodId, partner, lang);
-      
+
       clearTimeout(timeoutId);
-      
+
       if (base64Audio) {
         const ctx = getAudioContext();
-        
+
         // Use optimized optimized native decoder instead of slow JS loop
         const buffer = await decodeGeminiAudio(base64Audio, ctx);
-        
+
         setAudioBuffer(buffer);
-        
+
         // Success
         stopLoadingMessages();
         setIsGenerating(false);
@@ -306,7 +306,7 @@ const App: React.FC = () => {
       setIsGenerating(false);
       // Only alert if we haven't already timed out (isGenerating check handles race somewhat, but explicit is better)
       if (isGenerating) {
-         alert(lang === 'ja' ? '生成中にエラーが発生しました。' : 'An error occurred during generation.');
+        alert(lang === 'ja' ? '生成中にエラーが発生しました。' : 'An error occurred during generation.');
       }
     }
   };
@@ -321,7 +321,7 @@ const App: React.FC = () => {
       setIsPlaying(false);
       audioControllerRef.current = null;
     });
-    
+
     audioControllerRef.current = controller;
     setIsPlaying(true);
   };
@@ -348,26 +348,26 @@ const App: React.FC = () => {
       <div className="fixed inset-0 z-0">
         <BackgroundAnimation />
       </div>
-      
+
       {/* Language Toggle */}
       <div className="fixed top-6 right-6 z-50 flex gap-2">
-        <button 
+        <button
           onClick={() => { setLang('ja'); }}
-          className={`px-3 py-1 rounded-full text-xs font-bold tracking-widest transition-all ${lang === 'ja' ? 'bg-primary text-background-dark' : 'bg-white/10 text-white/40'}`}
+          className={`px-4 py-2 rounded-full text-xs font-bold tracking-widest transition-all backdrop-blur-md border ${lang === 'ja' ? 'bg-primary text-background-dark border-primary shadow-[0_0_10px_rgba(13,204,242,0.5)]' : 'bg-black/40 text-white/80 border-white/20 hover:bg-black/60'}`}
         >
           JP
         </button>
-        <button 
+        <button
           onClick={() => { setLang('en'); }}
-          className={`px-3 py-1 rounded-full text-xs font-bold tracking-widest transition-all ${lang === 'en' ? 'bg-primary text-background-dark' : 'bg-white/10 text-white/40'}`}
+          className={`px-4 py-2 rounded-full text-xs font-bold tracking-widest transition-all backdrop-blur-md border ${lang === 'en' ? 'bg-primary text-background-dark border-primary shadow-[0_0_10px_rgba(13,204,242,0.5)]' : 'bg-black/40 text-white/80 border-white/20 hover:bg-black/60'}`}
         >
           EN
         </button>
       </div>
-      
+
       <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-between px-6 py-12">
         <div className="w-full pt-12"></div>
-        
+
         <div className="flex flex-col items-center justify-center space-y-2">
           <div className="relative">
             <h1 className="drippy-text text-white text-[64px] md:text-[72px] font-extrabold leading-none tracking-tight text-center px-4">
@@ -377,11 +377,11 @@ const App: React.FC = () => {
           </div>
           <p className="text-primary/70 text-sm tracking-[0.4em] font-medium uppercase pt-8">{UI_TEXT[lang].welcome.subtitle}</p>
         </div>
-        
+
         <div className="flex flex-col items-center justify-center w-full space-y-12 pb-12">
           <div className="relative flex justify-center items-center group">
             <div className="orb-glow"></div>
-            <button 
+            <button
               onClick={() => { handleNextPhase('customize'); }}
               className="iridescent-orb flex h-32 w-32 items-center justify-center rounded-full backdrop-blur-2xl transition-all duration-700 hover:scale-110 active:scale-95 cursor-pointer"
             >
@@ -390,7 +390,7 @@ const App: React.FC = () => {
               </span>
             </button>
           </div>
-          
+
           <div className="flex w-full flex-row items-center justify-center gap-4 pt-4">
             <div className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(13,204,242,0.8)]"></div>
             <div className="h-1.5 w-1.5 rounded-full bg-white/20"></div>
@@ -405,16 +405,16 @@ const App: React.FC = () => {
 
   // PHASE 2: CUSTOMIZE
   const renderCustomize = () => {
-    const filteredPartners = userState.preferredGender === 'All' 
-      ? PARTNERS 
+    const filteredPartners = userState.preferredGender === 'All'
+      ? PARTNERS
       : PARTNERS.filter(p => p.gender === userState.preferredGender || p.gender === 'Neutral');
 
     return (
       <div className="font-display bg-background-light dark:bg-background-dark text-white selection:bg-primary/30 h-screen w-full relative bg-indigo-melty overflow-hidden">
-        
+
         {/* Scrollable Content Area */}
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden pb-40 z-10 scrollbar-hide">
-          
+
           {/* Top Bar */}
           <div className="flex items-center p-6 pb-2 justify-between">
             <button onClick={() => { setPhase('welcome'); }} className="text-white flex size-12 shrink-0 items-center justify-center rounded-full bg-white/5 backdrop-blur-md cursor-pointer hover:bg-white/10 transition">
@@ -425,16 +425,16 @@ const App: React.FC = () => {
 
           {/* Input & Headline */}
           <div className="mt-4 flex flex-col items-center">
-            
+
             {/* Name Input with Interactive Response */}
             <div className="w-full max-w-xs mt-8 mb-8 relative">
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder={UI_TEXT[lang].customize.namePlaceholder}
                 value={userState.name}
                 onChange={(e) => {
                   setUserState(prev => ({ ...prev, name: e.target.value }));
-                  if(e.target.value === '') setShowNameResponse(false);
+                  if (e.target.value === '') setShowNameResponse(false);
                 }}
                 onBlur={handleNameBlur}
                 className="w-full bg-white/5 border border-white/20 rounded-full px-6 py-3 text-center text-lg text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:bg-white/10 transition-all shadow-inner"
@@ -453,24 +453,24 @@ const App: React.FC = () => {
 
             {/* Visual Gender Selection Icons */}
             <div className="flex gap-6 mb-8">
-                <button 
-                  onClick={() => handleGenderFilter('Female')}
-                  className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all duration-300 ${userState.preferredGender === 'Female' ? 'bg-pink-500/20 text-pink-300 scale-110 shadow-[0_0_15px_rgba(244,114,182,0.3)]' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}
-                >
-                  <span className="material-symbols-outlined text-3xl">female</span>
-                </button>
-                <button 
-                   onClick={() => handleGenderFilter('All')}
-                   className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all duration-300 ${userState.preferredGender === 'All' ? 'bg-primary/20 text-primary scale-110 shadow-[0_0_15px_rgba(13,204,242,0.3)]' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}
-                >
-                   <span className="material-symbols-outlined text-3xl">wc</span>
-                </button>
-                <button 
-                  onClick={() => handleGenderFilter('Male')}
-                  className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all duration-300 ${userState.preferredGender === 'Male' ? 'bg-blue-500/20 text-blue-300 scale-110 shadow-[0_0_15px_rgba(96,165,250,0.3)]' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}
-                >
-                  <span className="material-symbols-outlined text-3xl">male</span>
-                </button>
+              <button
+                onClick={() => handleGenderFilter('Female')}
+                className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all duration-300 ${userState.preferredGender === 'Female' ? 'bg-pink-500/20 text-pink-300 scale-110 shadow-[0_0_15px_rgba(244,114,182,0.3)]' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}
+              >
+                <span className="material-symbols-outlined text-3xl">female</span>
+              </button>
+              <button
+                onClick={() => handleGenderFilter('All')}
+                className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all duration-300 ${userState.preferredGender === 'All' ? 'bg-primary/20 text-primary scale-110 shadow-[0_0_15px_rgba(13,204,242,0.3)]' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}
+              >
+                <span className="material-symbols-outlined text-3xl">wc</span>
+              </button>
+              <button
+                onClick={() => handleGenderFilter('Male')}
+                className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all duration-300 ${userState.preferredGender === 'Male' ? 'bg-blue-500/20 text-blue-300 scale-110 shadow-[0_0_15px_rgba(96,165,250,0.3)]' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}
+              >
+                <span className="material-symbols-outlined text-3xl">male</span>
+              </button>
             </div>
           </div>
 
@@ -479,17 +479,16 @@ const App: React.FC = () => {
             <div className="flex overflow-x-auto snap-x snap-mandatory [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden items-center px-4 pb-4">
               <div className="flex items-center px-4 gap-6">
                 {filteredPartners.map(partner => (
-                  <div 
+                  <div
                     key={partner.id}
                     onClick={() => { handlePartnerSelect(partner.id); }}
-                    className={`snap-center flex h-[400px] w-64 md:w-72 flex-col gap-6 rounded-xl liquid-glass iridescent-border p-6 transition-all duration-500 cursor-pointer ${
-                      userState.selectedPartnerId === partner.id ? 'scale-[1.05] border-primary/60 ring-1 ring-primary/30' : 'hover:scale-[1.02] opacity-70 hover:opacity-100'
-                    }`}
+                    className={`snap-center flex h-[400px] w-64 md:w-72 flex-col gap-6 rounded-xl liquid-glass iridescent-border p-6 transition-all duration-500 cursor-pointer ${userState.selectedPartnerId === partner.id ? 'scale-[1.05] border-primary/60 ring-1 ring-primary/30' : 'hover:scale-[1.02] opacity-70 hover:opacity-100'
+                      }`}
                   >
                     <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden flex items-center justify-center">
                       <div className={`absolute w-48 h-48 rounded-full bg-gradient-to-br opacity-60 blur-3xl ${partner.glowColorClass} ${partner.color}`}></div>
-                      <div 
-                        className="relative z-10 w-full h-full bg-cover bg-center mix-blend-overlay opacity-60 rounded-xl" 
+                      <div
+                        className="relative z-10 w-full h-full bg-cover bg-center mix-blend-overlay opacity-60 rounded-xl"
                         style={{ backgroundImage: `url("${partner.imageUrl}")` }}
                       ></div>
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -511,18 +510,17 @@ const App: React.FC = () => {
 
         {/* Footer Action - Fixed at Bottom with Gradient Fade */}
         <div className="absolute bottom-0 left-0 w-full px-8 pb-10 pt-16 z-20 bg-gradient-to-t from-[#0a0b1e] via-[#0a0b1e]/95 to-transparent pointer-events-none flex justify-center">
-           <div className="pointer-events-auto w-full max-w-md">
-              <button 
-                disabled={!userState.selectedPartnerId}
-                onClick={() => { handleNextPhase('mood'); }}
-                className={`w-full py-5 rounded-full font-semibold text-base tracking-[0.2em] shadow-[0_0_25px_rgba(13,204,242,0.4)] transition-all active:scale-95 flex items-center justify-center gap-2 ${
-                  userState.selectedPartnerId ? 'bg-primary text-background-dark' : 'bg-white/10 text-white/20 cursor-not-allowed shadow-none'
+          <div className="pointer-events-auto w-full max-w-md">
+            <button
+              disabled={!userState.selectedPartnerId}
+              onClick={() => { handleNextPhase('mood'); }}
+              className={`w-full py-5 rounded-full font-semibold text-base tracking-[0.2em] shadow-[0_0_25px_rgba(13,204,242,0.4)] transition-all active:scale-95 flex items-center justify-center gap-2 ${userState.selectedPartnerId ? 'bg-primary text-background-dark' : 'bg-white/10 text-white/20 cursor-not-allowed shadow-none'
                 }`}
-              >
-                {UI_TEXT[lang].customize.confirm}
-                <span className="material-symbols-outlined text-xl">auto_awesome</span>
-              </button>
-           </div>
+            >
+              {UI_TEXT[lang].customize.confirm}
+              <span className="material-symbols-outlined text-xl">auto_awesome</span>
+            </button>
+          </div>
         </div>
 
         {/* Ambient Background */}
@@ -534,10 +532,10 @@ const App: React.FC = () => {
 
   // PHASE 3: MOOD SELECTION (Replaces Input)
   const renderMoodSelection = () => {
-     // Extract mood keys from the DB constant
-     const moodKeys = Object.keys(MOOD_DISPLAY_NAMES) as MoodId[];
+    // Extract mood keys from the DB constant
+    const moodKeys = Object.keys(MOOD_DISPLAY_NAMES) as MoodId[];
 
-     return (
+    return (
       <div className="font-display bg-background-light dark:bg-background-dark antialiased h-screen w-full flex flex-col overflow-hidden relative">
         {/* Top Bar */}
         <div className="flex items-center p-4 pb-2 justify-between z-20">
@@ -548,74 +546,72 @@ const App: React.FC = () => {
         </div>
 
         <main className="flex-1 w-full h-full relative z-10 overflow-hidden">
-           {/* Title Layer */}
-           <div className="absolute top-10 left-0 w-full text-center z-20 pointer-events-none">
-              <h3 className="text-white text-3xl font-extralight tracking-widest leading-tight drop-shadow-[0_0_10px_rgba(13,204,242,0.5)]">
-                 {UI_TEXT[lang].mood.title}
-              </h3>
-              <p className="text-white/50 text-xs mt-2 tracking-[0.2em] uppercase">{UI_TEXT[lang].mood.subtitle}</p>
-           </div>
+          {/* Title Layer */}
+          <div className="absolute top-10 left-0 w-full text-center z-20 pointer-events-none">
+            <h3 className="text-white text-3xl font-extralight tracking-widest leading-tight drop-shadow-[0_0_10px_rgba(13,204,242,0.5)]">
+              {UI_TEXT[lang].mood.title}
+            </h3>
+            <p className="text-white/50 text-xs mt-2 tracking-[0.2em] uppercase">{UI_TEXT[lang].mood.subtitle}</p>
+          </div>
 
-           {/* Floating Bubbles Container */}
-           <div className="absolute inset-0 w-full h-full">
-              {moodKeys.map((moodId, index) => {
-                 const pos = BUBBLE_POSITIONS[index % BUBBLE_POSITIONS.length];
-                 const isSelected = userState.selectedMoodId === moodId;
-                 
-                 return (
-                    <div 
-                       key={moodId}
-                       onClick={() => handleMoodSelect(moodId)}
-                       className={`absolute cursor-pointer transition-all duration-500 animate-float ${
-                          isSelected ? 'z-30 scale-125' : 'z-10 hover:z-20 hover:scale-110 opacity-70 hover:opacity-100'
-                       }`}
-                       style={{
-                          top: pos.top,
-                          left: pos.left,
-                          right: pos.right,
-                          transform: pos.transform,
-                          animationDelay: pos.delay
-                       }}
-                    >
-                       <div className={`
+          {/* Floating Bubbles Container */}
+          <div className="absolute inset-0 w-full h-full">
+            {moodKeys.map((moodId, index) => {
+              const pos = BUBBLE_POSITIONS[index % BUBBLE_POSITIONS.length];
+              const isSelected = userState.selectedMoodId === moodId;
+
+              return (
+                <div
+                  key={moodId}
+                  onClick={() => handleMoodSelect(moodId)}
+                  className={`absolute cursor-pointer transition-all duration-500 animate-float ${isSelected ? 'z-30 scale-125' : 'z-10 hover:z-20 hover:scale-110 opacity-70 hover:opacity-100'
+                    }`}
+                  style={{
+                    top: pos.top,
+                    left: pos.left,
+                    right: pos.right,
+                    transform: pos.transform,
+                    animationDelay: pos.delay
+                  }}
+                >
+                  <div className={`
                           flex items-center justify-center w-24 h-24 md:w-28 md:h-28 rounded-full backdrop-blur-md border 
                           transition-all duration-500
-                          ${isSelected 
-                             ? 'bg-primary/20 border-primary shadow-[0_0_30px_rgba(13,204,242,0.6)] text-white' 
-                             : 'bg-white/5 border-white/10 hover:bg-white/10 text-white/80'
-                          }
+                          ${isSelected
+                      ? 'bg-primary/20 border-primary shadow-[0_0_30px_rgba(13,204,242,0.6)] text-white'
+                      : 'bg-white/5 border-white/10 hover:bg-white/10 text-white/80'
+                    }
                        `}>
-                          <span className={`text-xs md:text-sm font-medium tracking-wider text-center px-1 leading-relaxed ${isSelected ? 'font-bold' : ''}`}>
-                             {lang === 'ja' ? MOOD_DISPLAY_NAMES[moodId].ja : MOOD_DISPLAY_NAMES[moodId].en}
-                          </span>
-                       </div>
-                    </div>
-                 );
-              })}
-           </div>
-
-           {/* Connect Button (Fixed Bottom) */}
-           <div className="absolute bottom-10 left-0 w-full flex justify-center z-30 px-6">
-             <div className="relative group">
-                {userState.selectedMoodId && (
-                  <div className="absolute -inset-6 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-                )}
-                <button 
-                  onClick={() => { handleConnect(); }}
-                  disabled={!userState.selectedMoodId}
-                  className={`relative flex flex-col items-center justify-center w-36 h-36 rounded-full portal-glow text-background-dark transition-transform active:scale-95 duration-300 ${
-                     userState.selectedMoodId ? 'bg-primary' : 'bg-slate-700 cursor-not-allowed grayscale opacity-50'
-                  }`}
-                >
-                  <div className="flex flex-col items-center">
-                    <span className="material-symbols-outlined text-4xl mb-2">headphones</span>
-                    <span className="text-[10px] font-bold wide-track tracking-[0.1em] text-center px-2 leading-tight">
-                      {UI_TEXT[lang].mood.connect}
+                    <span className={`text-xs md:text-sm font-medium tracking-wider text-center px-1 leading-relaxed ${isSelected ? 'font-bold' : ''}`}>
+                      {lang === 'ja' ? MOOD_DISPLAY_NAMES[moodId].ja : MOOD_DISPLAY_NAMES[moodId].en}
                     </span>
                   </div>
-                </button>
-              </div>
-           </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Connect Button (Fixed Bottom) */}
+          <div className="absolute bottom-10 left-0 w-full flex justify-center z-30 px-6">
+            <div className="relative group">
+              {userState.selectedMoodId && (
+                <div className="absolute -inset-6 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+              )}
+              <button
+                onClick={() => { handleConnect(); }}
+                disabled={!userState.selectedMoodId}
+                className={`relative flex flex-col items-center justify-center w-36 h-36 rounded-full portal-glow text-background-dark transition-transform active:scale-95 duration-300 ${userState.selectedMoodId ? 'bg-primary' : 'bg-slate-700 cursor-not-allowed grayscale opacity-50'
+                  }`}
+              >
+                <div className="flex flex-col items-center">
+                  <span className="material-symbols-outlined text-4xl mb-2">headphones</span>
+                  <span className="text-[10px] font-bold wide-track tracking-[0.1em] text-center px-2 leading-tight">
+                    {UI_TEXT[lang].mood.connect}
+                  </span>
+                </div>
+              </button>
+            </div>
+          </div>
         </main>
 
         {/* Background Ambience */}
@@ -624,7 +620,7 @@ const App: React.FC = () => {
           <div className="absolute bottom-[-20%] left-[-10%] w-[80%] h-[80%] rounded-full bg-primary/5 blur-[120px]"></div>
         </div>
       </div>
-     );
+    );
   };
 
   // PHASE 4: CONNECT
@@ -693,7 +689,7 @@ const App: React.FC = () => {
       </main>
 
       <footer className="relative z-10 p-8 flex flex-col items-center">
-        <button 
+        <button
           onClick={() => {
             stopLoadingMessages();
             setPhase('mood');
@@ -711,25 +707,25 @@ const App: React.FC = () => {
   // PHASE 5: SLEEP
   const renderSleep = () => {
     const currentPartner = PARTNERS.find(p => p.id === userState.selectedPartnerId);
-    
+
     return (
       <div className="relative h-screen w-full flex flex-col overflow-hidden bg-transparent font-display">
         <div className="fixed inset-0 z-0">
           <BackgroundAnimation />
         </div>
-        
+
         {/* Content Wrapper */}
         <div className="relative z-10 flex h-full w-full flex-col">
           {/* Overlay */}
           <div className="absolute inset-0 opacity-40 pointer-events-none" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(13, 204, 242, 0.1) 0%, transparent 70%)' }}></div>
-          
+
           {/* Top Status */}
           <div className="flex items-center p-6 pb-2 justify-between z-10 opacity-30">
             <div className="text-white flex size-12 shrink-0 items-center">
               <span className="material-symbols-outlined text-2xl">nights_stay</span>
             </div>
             <div className="flex w-12 items-center justify-end">
-               <span className="material-symbols-outlined text-xl text-white">battery_low</span>
+              <span className="material-symbols-outlined text-xl text-white">battery_low</span>
             </div>
           </div>
 
@@ -747,8 +743,8 @@ const App: React.FC = () => {
           <div className="px-6 py-4 z-10 w-full max-w-md mx-auto">
             <div className="flex flex-col gap-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/5 px-4 py-3">
               <div className="flex items-center gap-4 overflow-hidden">
-                <div 
-                  className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 shrink-0 opacity-60" 
+                <div
+                  className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 shrink-0 opacity-60"
                   style={{ backgroundImage: `url("${currentPartner?.imageUrl}")` }}
                 ></div>
                 <div className="flex-1">
@@ -757,10 +753,10 @@ const App: React.FC = () => {
                   </p>
                   <p className="text-white/40 text-xs font-normal leading-normal truncate">{isPlaying ? 'Playing...' : 'Paused'}</p>
                 </div>
-                <button 
+                <button
                   onClick={() => {
-                     if (isPlaying) stopAudio();
-                     else if (audioBuffer) playBuffer(audioBuffer);
+                    if (isPlaying) stopAudio();
+                    else if (audioBuffer) playBuffer(audioBuffer);
                   }}
                   className="flex shrink-0 items-center justify-center rounded-full size-10 bg-primary/20 text-primary border border-primary/30 cursor-pointer hover:bg-primary/30 transition"
                 >
@@ -779,24 +775,24 @@ const App: React.FC = () => {
             <div className="relative h-12 flex items-center justify-center overflow-hidden">
               <div className="absolute bottom-0 w-full h-[1px] bg-white/10"></div>
               {/* Simple CSS Visualizer bars */}
-               <div className="flex items-end gap-1 h-full w-full justify-center opacity-40">
-                 {[20, 40, 30, 60, 45, 70, 25, 15, 50, 35, 65, 20].map((h, i) => (
-                   <div 
-                     key={i} 
-                     className={`w-1 bg-primary/60 rounded-full transition-all duration-300 ${isPlaying ? 'animate-pulse' : ''}`}
-                     style={{ 
-                       height: isPlaying ? `${Math.max(10, Math.random() * 90)}%` : `${h}%`,
-                       transitionDuration: '0.2s'
-                     }} 
-                   ></div>
-                 ))}
+              <div className="flex items-end gap-1 h-full w-full justify-center opacity-40">
+                {[20, 40, 30, 60, 45, 70, 25, 15, 50, 35, 65, 20].map((h, i) => (
+                  <div
+                    key={i}
+                    className={`w-1 bg-primary/60 rounded-full transition-all duration-300 ${isPlaying ? 'animate-pulse' : ''}`}
+                    style={{
+                      height: isPlaying ? `${Math.max(10, Math.random() * 90)}%` : `${h}%`,
+                      transitionDuration: '0.2s'
+                    }}
+                  ></div>
+                ))}
               </div>
             </div>
           </div>
 
           {/* End Session */}
           <div className="flex px-4 pb-12 justify-center z-10">
-            <button 
+            <button
               onClick={() => { handleRestart(); }}
               className="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-white/5 hover:bg-white/10 text-white/20 hover:text-white/40 border border-white/5 transition-all text-xs font-medium leading-normal tracking-[0.2em] backdrop-blur-sm"
             >
