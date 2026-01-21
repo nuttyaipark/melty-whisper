@@ -188,16 +188,7 @@
       font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
     }
   </style>
-  <script type="importmap">
-    {
-      "imports": {
-        "react/": "https://esm.sh/react@^19.2.3/",
-        "react": "https://esm.sh/react@^19.2.3",
-        "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
-        "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
-      }
-    }
-    </script>
+
 </head>
 
 <body class="font-display">
@@ -213,25 +204,7 @@
     </defs>
   </svg>
   <div id="root" class="h-full"></div>
-  <script type="module">
-    import React from "https://esm.sh/react@19.2.3";
-    import { createRoot } from "https://esm.sh/react-dom@19.2.3/client";
-
-    function App() {
-      return React.createElement(
-        "div",
-        { className: "min-h-screen flex items-center justify-center text-cyan-glow" },
-        React.createElement(
-          "h1",
-          { className: "text-4xl font-bold glow-text" },
-          "Melty Whisper is alive."
-        )
-      );
-    }
-
-    const root = createRoot(document.getElementById("root"));
-    root.render(React.createElement(App));
-  </script>
+  <script type="module" src="/index.tsx"></script>
 </body>
 
 </html>
