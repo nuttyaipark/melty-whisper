@@ -26,7 +26,7 @@ const addWavHeader = (pcmData: ArrayBuffer, sampleRate: number, numChannels: num
   const header = new ArrayBuffer(44);
   const view = new DataView(header);
   const dataLen = pcmData.byteLength;
-  
+
   // RIFF identifier
   writeString(view, 0, 'RIFF');
   // file length
@@ -53,12 +53,12 @@ const addWavHeader = (pcmData: ArrayBuffer, sampleRate: number, numChannels: num
   writeString(view, 36, 'data');
   // data chunk length
   view.setUint32(40, dataLen, true);
-  
+
   // Combine header and data
   const wavFile = new Uint8Array(44 + dataLen);
   wavFile.set(new Uint8Array(header), 0);
   wavFile.set(new Uint8Array(pcmData), 44);
-  
+
   return wavFile;
 };
 
@@ -72,10 +72,10 @@ export const decodeGeminiAudio = async (
 ): Promise<AudioBuffer> => {
   // 1. Base64 -> ArrayBuffer (Native Fetch)
   const pcmBuffer = await base64ToArrayBuffer(base64);
-  
+
   // 2. Add WAV Header (Gemini is 24kHz, 1ch, 16bit PCM)
   const wavBytes = addWavHeader(pcmBuffer, 24000, 1, 16);
-  
+
   // 3. Native Decode (C++ threaded implementation)
   // This handles the Int16 -> Float32 conversion much faster than JS
   return await ctx.decodeAudioData(wavBytes.buffer);
@@ -112,14 +112,14 @@ export const playASMRBuffer = (
 
   // 2. Ear-to-Ear Panning (3D Movement)
   const panner = ctx.createStereoPanner();
-  
+
   // LFO (Low Frequency Oscillator) to drive the panning automatically
   const lfo = ctx.createOscillator();
   const lfoGain = ctx.createGain();
 
   lfo.type = 'sine';
   lfo.frequency.value = 0.12; // 0.12Hz = Very slow, hypnotic drift (approx 8.3s per cycle)
-  
+
   lfoGain.gain.value = 0.9; // Pan depth: 0.9 means it goes almost hard left to hard right
 
   // 3. Connect the Audio Graph
@@ -161,57 +161,80 @@ export const playASMRBuffer = (
 };
 
 /**
- * Generates a "Melty" click sound.
- * Implements a water-drop like texture with a high-frequency sparkle.
- * 
- * 1. Base Tone (Water Drop Core): 800Hz -> 150Hz sweep
- * 2. Envelope: Smooth attack, long melt (0.5s)
- * 3. Filter: Lowpass 1000Hz to soften edges
- * 4. Sparkle: High freq (2500Hz) accent
+ * Loads an audio file from a URL.
  */
-export const playInteractionSound = (ctx: AudioContext) => {
-  const t = ctx.currentTime;
+export const loadAudio = async (url: string, ctx: AudioContext): Promise<AudioBuffer> => {
+  const response = await fetch(url);
+  const arrayBuffer = await response.arrayBuffer();
+  return await ctx.decodeAudioData(arrayBuffer);
+};
 
-  // 1. Base Tone (The "Drop")
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  
-  osc.type = 'sine';
-  // Pitch sweep for water drop effect: 800Hz -> 150Hz
-  osc.frequency.setValueAtTime(800, t);
-  osc.frequency.exponentialRampToValueAtTime(150, t + 0.1);
-  
-  // Envelope
-  gain.gain.setValueAtTime(0, t);
-  gain.gain.linearRampToValueAtTime(0.3, t + 0.01); 
-  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+/**
+ * Generates a simple impulse response for convolution reverb.
+ * Creates a decaying noise burst to simulate a room/hall.
+ */
+const createImpulseResponse = (ctx: AudioContext, duration: number, decay: number, reverse: boolean): AudioBuffer => {
+  const sampleRate = ctx.sampleRate;
+  const length = sampleRate * duration;
+  const impulse = ctx.createBuffer(2, length, sampleRate);
+  const left = impulse.getChannelData(0);
+  const right = impulse.getChannelData(1);
 
-  // Filter (Soften edges)
-  const filter = ctx.createBiquadFilter();
-  filter.type = 'lowpass';
-  filter.frequency.setValueAtTime(1000, t);
+  for (let i = 0; i < length; i++) {
+    const n = reverse ? length - i : i;
+    let noise = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
+    left[i] = noise;
+    right[i] = noise;
+  }
+  return impulse;
+};
 
-  osc.connect(filter);
-  filter.connect(gain);
-  gain.connect(ctx.destination);
+// Singleton reverb buffer to avoid re-generating every click
+let sharedReverbBuffer: AudioBuffer | null = null;
 
-  osc.start(t);
-  osc.stop(t + 0.5);
+/**
+ * Plays the "Premium" Bubble Sound from a buffer with Reverb.
+ */
+export const playInteractionSound = (ctx: AudioContext, buffer: AudioBuffer | null) => {
+  if (!buffer) return;
 
-  // 2. Sparkle (The "Light")
-  const sparkle = ctx.createOscillator();
-  const sparkleGain = ctx.createGain();
-  
-  sparkle.type = 'sine';
-  sparkle.frequency.setValueAtTime(2500, t);
-  
-  sparkleGain.gain.setValueAtTime(0, t);
-  sparkleGain.gain.linearRampToValueAtTime(0.05, t + 0.01);
-  sparkleGain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
-  
-  sparkle.connect(sparkleGain);
-  sparkleGain.connect(ctx.destination);
-  
-  sparkle.start(t);
-  sparkle.stop(t + 0.1);
+  const source = ctx.createBufferSource();
+  source.buffer = buffer;
+
+  // Create Reverb (Convolver)
+  const convolver = ctx.createConvolver();
+
+  if (!sharedReverbBuffer) {
+    // Generate a "Large Hall" style reverb (2.5s tail, factor 2.0 decay)
+    sharedReverbBuffer = createImpulseResponse(ctx, 2.5, 2.0, false);
+  }
+  convolver.buffer = sharedReverbBuffer;
+
+  // Mix: Dry (Original) + Wet (Reverb)
+  const dryGain = ctx.createGain();
+  const wetGain = ctx.createGain();
+  const masterGain = ctx.createGain();
+
+  dryGain.gain.value = 0.8; // Strong direct sound
+  wetGain.gain.value = 0.3; // Subtle reverb tail (User asked for "controlled" reverb)
+
+  // Master volume control (User asked for "understated/elegant")
+  masterGain.gain.value = 0.6;
+
+  // Randomize Pitch slightly for organic feel
+  // +/- 100 cents (semitone)
+  const detune = (Math.random() - 0.5) * 200;
+  source.detune.value = detune;
+
+  // Routing
+  source.connect(dryGain);
+  source.connect(convolver);
+  convolver.connect(wetGain);
+
+  dryGain.connect(masterGain);
+  wetGain.connect(masterGain);
+
+  masterGain.connect(ctx.destination);
+
+  source.start();
 };
