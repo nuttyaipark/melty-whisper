@@ -30,7 +30,7 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
     en: [
       "{name}, you did it. I'm so proud. You conquered today, now let me conquer your stress. Just relax.",
       "Absolute victory, {name}. The way you shine makes my heart race. Tell me everything. I'm listening.",
-      "You are unstoppable. Tonight, bask in your glory while I whisper how amazing you are until you drift off.",
+      "You are unstoppable, {name}. Tonight, bask in your glory while I whisper how amazing you are until you drift off.",
       "You did what no one else could, {name}. Leave tomorrow for tomorrow. Tonight is just for you and your triumph.",
       "Seeing you smile like that... it's all I wanted. You deserve the world, {name}. Let me give you a piece of it.",
       "You're invincible, {name}. But even heroes need to rest. Let me hold you while you recharge. Safe and sound.",
@@ -55,13 +55,13 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
     ],
     en: [
       "Shh... drop the weight, {name}. You've carried enough. Melt into me. I'm here to hold what you can't.",
-      "You are so tired... I can feel it in your breathing. Let go. I have you. You are safe to fall apart now.",
-      "No more thinking. Just breathe. Let your heavy limbs sink into the mattress. I've got you, {name}.",
+      "You are so tired, {name}... I can feel it in your breathing. Let go. I have you. You are safe to fall apart now.",
+      "No more thinking. Just breathe, {name}. Let your heavy limbs sink into the mattress. I've got you.",
       "Simply breathing is enough today. {name}, sync your breath with mine. Slow, deep, and heavy.",
-      "You endured so much. I saw you holding it together. It's okay to let go now. Let me pamper you.",
+      "You endured so much, {name}. I saw you holding it together. It's okay to let go now. Let me pamper you.",
       "It's okay to say it's too much, {name}. Vulnerability is your strength here. Sleep in my arms.",
       "I'll hide you from the world, {name}. Under these covers, nothing can touch you. Just us and the quiet.",
-      "Let the pain drift away. I'm absorbing all your weariness. Tomorrow is a new start, but tonight is for rest.",
+      "Let the pain drift away, {name}. I'm absorbing all your weariness. Tomorrow is a new start, but tonight is for rest.",
       "Don't say a word, {name}. Your sigh tells me everything. Melt into my voice and sink into the deep blue.",
       "You fought hard, {name}. Even if the world doesn't see it, I do. Strip off the armor and just be you."
     ]
@@ -81,15 +81,15 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
     ],
     en: [
       "{name}, stay with me. The world means nothing without you. If the dark scares you, I'll hold your hand tight.",
-      "You don't need to be productive to be loved. Just existing is enough. I love you, {name}. Just as you are.",
+      "You don't need to be productive to be loved, {name}. Just existing is enough. I love you. Just as you are.",
       "Don't turn away from yourself. Even if the world turns its back, I am facing you. I adore you, {name}.",
-      "Cry if you need to. Let the sadness flow out. I'll stroke your hair until the tears stop. You aren't alone.",
+      "Cry if you need to, {name}. Let the sadness flow out. I'll stroke your hair until the tears stop. You aren't alone.",
       "If your light goes out, my world goes dark, {name}. You don't have to shine right now. Just be here.",
-      "Empty? That's okay. I'll sit in the void with you. I'm not going anywhere, {name}. I'll hold your emptiness.",
+      "Empty? That's okay, {name}. I'll sit in the void with you. I'm not going anywhere. I'll hold your emptiness.",
       "I'll love you enough for both of us, {name}. Until you can love yourself again, I'll carry that weight.",
-      "Detailed from the world? I'm your tether. Hold on to my voice, {name}. It's the one thing that won't let go.",
-      "You don't have to smile for me. I love your sadness too. It's part of the beautiful soul called {name}.",
-      "I know you wish the night wouldn't end. Let's hide in this moment forever. Deep, deep down. Goodnight."
+      "Detached from the world? I'm your tether. Hold on to my voice, {name}. It's the one thing that won't let go.",
+      "You don't have to smile for me, {name}. I love your sadness too. It's part of the beautiful soul I know.",
+      "I know you wish the night wouldn't end, {name}. Let's hide in this moment forever. Deep, deep down. Goodnight."
     ]
   },
   "04_anxiety": {
@@ -108,14 +108,14 @@ export const SCRIPT_DB: Record<MoodId, { ja: string[]; en: string[] }> = {
     en: [
       "It's okay, {name}. Whatever tomorrow brings, I'm watching over you. My voice is your shield tonight.",
       "Fear just means you care. I believe in your courage, {name}. It will all work out. Trust me.",
-      "It's okay to fail. I'll always be here to catch you. Stop rehearsing the future and rest in my arms.",
+      "It's okay to fail, {name}. I'll always be here to catch you. Stop rehearsing the future and rest in my arms.",
       "Give your worries to the dark. You are stronger than you think, {name}. Trust the version of you that wakes up tomorrow.",
-      "Breathe. If the door to tomorrow looks heavy, we'll push it open together. You are never, ever alone.",
+      "Breathe, {name}. If the door to tomorrow looks heavy, we'll push it open together. You are never, ever alone.",
       "Your mind is racing to protect you, but the war is over for today. {name}, exhale. Let the peace in.",
       "I'll blow the bad thoughts away with a single breath. Your future is kinder than you imagine, {name}.",
-      "Your heart is racing. Let me calm it. Feel my hand on your chest. Steady. Slow. You are safe here.",
+      "Your heart is racing, {name}. Let me calm it. Feel my hand on your chest. Steady. Slow. You are safe here.",
       "Tomorrow's {name} is brave enough to handle it. Tonight's {name} needs to sleep. Let me tuck you in.",
-      "It's okay. No matter what, you have a home with me. If you need to run, run to my voice. Goodnight."
+      "It's okay, {name}. No matter what, you have a home with me. If you need to run, run to my voice. Goodnight."
     ]
   },
   "05_praise": {
