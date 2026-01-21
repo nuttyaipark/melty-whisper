@@ -2,9 +2,21 @@ import { GoogleGenAI, Modality } from "@google/genai";
 import { Partner, Language, MoodId } from "../types";
 import { SCRIPT_DB } from "../data/scriptData";
 
-const API_KEY = process.env.API_KEY || '';
+// Lazy initialization singleton
+let ai: GoogleGenAI | null = null;
 
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+const getAIClient = () => {
+  if (ai) return ai;
+
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) {
+    console.warn("VITE_GEMINI_API_KEY is not set. Gemini features will be disabled.");
+    return null;
+  }
+
+  ai = new GoogleGenAI({ apiKey });
+  return ai;
+};
 
 export const generateMeltyAudio = async (
   userName: string,
@@ -13,10 +25,16 @@ export const generateMeltyAudio = async (
   language: Language
 ): Promise<string | null> => {
   try {
+    const client = getAIClient();
+    if (!client) {
+      // Rule: Interrupt/Skip if no key
+      return null;
+    }
+
     // 1. Select a random script from the chosen mood category
     const scripts = SCRIPT_DB[moodId];
     if (!scripts || scripts.length === 0) {
-        throw new Error(`No scripts found for mood: ${moodId}`);
+      throw new Error(`No scripts found for mood: ${moodId}`);
     }
 
     // Secure random selection
@@ -30,7 +48,7 @@ export const generateMeltyAudio = async (
 
     // 3. Call Gemini TTS
     // Note: We only send the text for speech generation, no prompt engineering needed.
-    const response = await ai.models.generateContent({
+    const response = await client.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",
       contents: [{ parts: [{ text: finalText }] }],
       config: {
@@ -44,7 +62,7 @@ export const generateMeltyAudio = async (
     });
 
     const base64Audio = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-    
+
     if (!base64Audio) {
       console.error("No audio data found in response");
       return null;
