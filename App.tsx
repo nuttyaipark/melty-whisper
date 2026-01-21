@@ -166,9 +166,9 @@ const BUBBLE_POSITIONS = [
   { top: '35%', right: '30%', delay: '0.5s' },
   { top: '50%', left: '15%', delay: '1.5s' },
   { top: '55%', right: '20%', delay: '2.5s' },
-  { top: '70%', left: '35%', delay: '0.2s' },
-  { top: '75%', right: '10%', delay: '1.8s' },
-  { top: '85%', left: '10%', delay: '1.2s' },
+  { top: '62%', left: '35%', delay: '0.2s' },
+  { top: '60%', right: '10%', delay: '1.8s' },
+  { top: '68%', left: '15%', delay: '1.2s' },
   { top: '25%', left: '50%', transform: 'translateX(-50%)', delay: '3s' },
 ];
 
@@ -794,7 +794,7 @@ const App: React.FC = () => {
           <div className="flex px-4 pb-12 justify-center z-10">
             <button
               onClick={() => { handleRestart(); }}
-              className="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-white/5 hover:bg-white/10 text-white/20 hover:text-white/40 border border-white/5 transition-all text-xs font-medium leading-normal tracking-[0.2em] backdrop-blur-sm"
+              className="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white border border-white/10 transition-all text-xs font-medium leading-normal tracking-[0.2em] backdrop-blur-sm"
             >
               <span className="truncate">{UI_TEXT[lang].sleep.end}</span>
             </button>
