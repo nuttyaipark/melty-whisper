@@ -50,7 +50,15 @@ export const generateMeltyAudio = async (
     // Note: We only send the text for speech generation, no prompt engineering needed.
     const response = await client.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",
-      contents: [{ parts: [{ text: finalText }] }],
+      // Prompt Engineering for ASMR/Whisper Quality
+      // We instruct the model to "act" rather than just read.
+      const actingPrompt = `
+[Direction: Speak in a very sweet, breathy, whispering voice. Act like a lover whispering into the listener's ear in bed. The goal is to create brain-melting ASMR tingles. Do not read the direction tag.]
+
+${finalText}
+`;
+
+      contents: [{ parts: [{ text: actingPrompt }] }],
       config: {
         responseModalities: [Modality.AUDIO],
         speechConfig: {

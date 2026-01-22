@@ -78,7 +78,7 @@ export const decodeGeminiAudio = async (
 
   // 3. Native Decode (C++ threaded implementation)
   // This handles the Int16 -> Float32 conversion much faster than JS
-  return await ctx.decodeAudioData(wavBytes.buffer);
+  return await ctx.decodeAudioData(wavBytes.buffer as ArrayBuffer);
 };
 
 export interface AudioController {
