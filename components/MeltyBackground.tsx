@@ -20,12 +20,13 @@ const MeltyBackground: React.FC = () => {
     return (
         <div className="fixed inset-0 z-0 pointer-events-none">
             <lottie-player
-                src="/background.lottie.json"
+                src={`${import.meta.env.BASE_URL}background.lottie.json`.replace('//', '/')}
                 background="transparent"
                 speed="1"
                 loop
                 autoplay
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                preserveAspectRatio="xMidYMid slice"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
             ></lottie-player>
 
             {/* Optional Overlay to blend it better with the app theme if needed */}
