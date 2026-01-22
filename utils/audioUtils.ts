@@ -219,7 +219,7 @@ export const playInteractionSound = (ctx: AudioContext, buffer: AudioBuffer | nu
   wetGain.gain.value = 0.3; // Subtle reverb tail (User asked for "controlled" reverb)
 
   // Master volume control (User asked for "understated/elegant")
-  masterGain.gain.value = 0.6;
+  masterGain.gain.value = 0.3;
 
   // Randomize Pitch slightly for organic feel
   // +/- 100 cents (semitone)
