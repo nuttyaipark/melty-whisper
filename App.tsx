@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { VoiceName, AppPhase, UserState, Partner, Language, GenderType, MoodId } from './types';
 import { generateMeltyAudio } from './services/geminiService';
 import { decodeGeminiAudio, playASMRBuffer, AudioController, loadAudio, playInteractionSound } from './utils/audioUtils';
+import Footer from './components/Footer';
 import MeltyBackground from './components/MeltyBackground';
 import FloatingBubble from './components/FloatingBubble';
 import { MOOD_DISPLAY_NAMES } from './data/scriptData';
@@ -842,6 +843,7 @@ const App: React.FC = () => {
       {phase === 'mood' && renderMoodSelection()}
       {phase === 'connect' && renderConnect()}
       {phase === 'sleep' && renderSleep()}
+      <Footer />
     </>
   );
 
